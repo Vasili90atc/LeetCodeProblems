@@ -1,7 +1,10 @@
 package gt.atc.training.LeetCodeProblems;
 
-public class Solution {
+import java.util.ArrayList;
 
+public class Solution {
+	private ArrayList<Solution> words;
+	
 	public int lengthOfLastWord(String s) {
 		String[] parts = s.split(" ");
 
@@ -45,5 +48,20 @@ public class Solution {
 			exponent--;
 		}
 		return num;
+	}
+	
+	
+	public int searchInsert(int[] nums, int target) {
+		// If number exists
+		for(int i=0; i<nums.length; i++) {
+			if (nums[i] == target ) return i;
+		}
+		
+		// If number does not exist in list
+		for (int i=0; i<nums.length; i++) {
+			if (nums[i] >= target) return i;
+		}
+		// Target is biggest in list
+		return nums.length;
 	}
 }
