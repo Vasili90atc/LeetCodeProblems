@@ -1,9 +1,9 @@
-package gt.atc.training.LeetCodeProblems;
+package gr.atc.training.LeetCodeProblems;
 
-import java.util.ArrayList;
+
+import java.util.Stack;
 
 public class Solution {
-	private ArrayList<Solution> words;
 	
 	public int lengthOfLastWord(String s) {
 		String[] parts = s.split(" ");
@@ -54,14 +54,46 @@ public class Solution {
 	public int searchInsert(int[] nums, int target) {
 		// If number exists
 		for(int i=0; i<nums.length; i++) {
-			if (nums[i] == target ) return i;
-		}
+			// If number does not exist in list
+			if (nums[i] >= target) {
+				return i;
+			
+			}
+		 }
 		
-		// If number does not exist in list
-		for (int i=0; i<nums.length; i++) {
-			if (nums[i] >= target) return i;
-		}
+		
+		//for (int i=0; i<nums.length; i++) {
+		//	if (nums[i] >= target)
+		//	return i;
+		// }
 		// Target is biggest in list
+		
 		return nums.length;
 	}
+	
+	public boolean isValid(String s) {
+		Stack<Character> symbolStack = new Stack<>();
+		
+		for(char symbol : s.toCharArray()) {
+			//System.out.println(symbol);
+			if (symbol == '(' || symbol == '{' || symbol == '[') {
+				symbolStack.add(symbol);
+			}
+			if (symbol == ')' || symbol == '}' || symbol == ']') {
+				if (symbolStack.peek() == '(' && symbol != ')') 
+					return false;
+				if (symbolStack.peek() == '{' && symbol != '}') 
+					return false;
+				if (symbolStack.peek() == '[' && symbol != ']') 
+					return false;
+				symbolStack.pop();
+			}
+		}
+		
+		if (symbolStack.size() > 0) 
+			return false;
+		
+		return true;
+	}
+
 }
